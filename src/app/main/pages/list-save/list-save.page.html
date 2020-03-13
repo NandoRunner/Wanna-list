@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/lists"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }}</ion-title>
+    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="formGroup" (submit)="onSubmit()">
+    <ion-item>
+      <ion-icon name="paper" slot="start" color="primary"></ion-icon>
+      <ion-input
+        type="text"
+        placeholder="Name"
+        autofocus="true"
+        inputmode="text"
+        formControlName="name"
+      >
+      </ion-input>
+      <ion-toggle *ngIf="listId" slot="end" color="primary" formControlName="isactive"></ion-toggle>
+    </ion-item>
+    <ion-button expand="full" type="submit" [disabled]="formGroup.invalid">
+      Save
+    </ion-button>
+  </form>
+</ion-content>

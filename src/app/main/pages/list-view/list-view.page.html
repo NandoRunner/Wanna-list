@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <app-menu-toggle
+      slot="start"
+      menu="main-menu"
+    ></app-menu-toggle>
+    <ion-title>Lists</ion-title>
+    <app-logout-button
+      slot="end"
+      menu="main-menu"
+    ></app-logout-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col
+        size-sm="10"
+        size-md="10"
+        size-lg="10"
+        size-xl="10"
+      >
+
+
+  <ion-list *ngIf="lists$ | async as lists">
+    <ng-container *ngIf="lists.length > 0; else noTasks">
+      <app-list
+        *ngFor="let list of lists"
+        [list]="list"
+        (update)="onUpdate($event)"
+        (delete)="onDelete($event)"
+        (isactive)="onDone($event)"
+      ></app-list>
+    </ng-container>
+    <ng-template #noTasks>
+      <ion-item lines="none">No List yet...</ion-item>
+    </ng-template>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/lists/create" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
